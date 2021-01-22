@@ -69,6 +69,8 @@ EOF
 sed -i 's/#en_US.UTF-8/en_US.UTF-8/g' /mnt/locale.gen
 arch-chroot /mnt locale-gen
 
+arch-chroot /mnt systemctl enable dhcpcd
+
 echo "Set your root password: "
 arch-chroot /mnt passwd
 
