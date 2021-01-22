@@ -35,7 +35,7 @@ read host
 timedatectl set-ntp true
 
 echo -n "Do you want automatic(a) or manual(m) disk partitioning and formatting (default is automatic): "
-echo part
+read part
 
 case $part in
 
