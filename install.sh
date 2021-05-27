@@ -2,24 +2,24 @@
 
 autoPart() {
     fdisk -l
-    echo -n "Choose your partition: "
+    echo -n "Choose partition: "
     read disk
 
-    EOF | fdisk $disk
-        g
-        n
-    
-
-        +512M
-        n
+    cat << EOF | fdisk $disk
+    g
+    n
 
 
+    +512M
+    n
 
-        t
-        1
-        1
-        w
-    EOF
+
+
+    t
+    1
+    1
+    w
+EOF
 
     mkfs.vfat ${disk}1
     mkfs.ext4 ${disk}2
