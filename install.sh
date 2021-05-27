@@ -61,9 +61,9 @@ genfstab -U /mnt >> /mnt/etc/fstab
 echo "${host}" > /mnt/etc/hostname
 
 cat << EOF > /mnt/etc/hosts
-    127.0.0.1       localhost
-    ::1             localhost
-    127.0.1.1       ${host}.localdomain ${host}
+127.0.0.1       localhost
+::1             localhost
+127.0.1.1       ${host}.localdomain ${host}
 EOF
 
 sed -i 's/#en_US.UTF-8/en_US.UTF-8/g' /mnt/locale.gen
