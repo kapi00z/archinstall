@@ -28,7 +28,7 @@ fi
 
 pacman -S sudo vim python openssh --noconfirm
 
-sed 's/# %wheel ALL=(ALL) NOPASSWD: ALL/ %wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
+sed -i 's/# %wheel ALL=(ALL) NOPASSWD: ALL/ %wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 useradd -mG wheel kacper
 echo "Provide password: "
 read pass
