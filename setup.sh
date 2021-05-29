@@ -10,7 +10,7 @@ if [[ ! $(sudo cat /etc/dhcpcd.conf | grep -e "static " | wc -l) -eq "0" ]]
 then
     echo "Static IP already!"
     export addr=$(cat /etc/dhcpcd.conf | grep -e "ip_address" | sed 's/[\/]/./' | cut -d "." -f 4)
-    test [[ "$addr" == "3${host}" ]]
+    if [[ "$addr" == "3${host}" ]]
     then
         echo "Static IP address correct!"
     else
