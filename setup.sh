@@ -3,7 +3,7 @@
 echo "Provide host number: "
 read host
 
-hostnamectl set-hostname="arch${host}"
+hostnamectl set-hostname "arch${host}"
 sed -i "s/arch/arch${host}/g" /etc/hosts
 
 if [[ ! $(sudo cat /etc/dhcpcd.conf | grep -e "static " | wc -l) -eq "0" ]]
