@@ -86,7 +86,7 @@ arch-chroot /mnt passwd
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
-cat << EOF > run.sh
+cat << 'EOF' > run.sh
 #!/bin/bash
 
 args=($@)
