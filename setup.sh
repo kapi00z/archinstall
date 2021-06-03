@@ -65,7 +65,7 @@ fi
 hostnamectl set-hostname "${host}"
 sed -i "s/arch/${host}/g" /etc/hosts
 
-if [[ ! $(sudo cat /etc/dhcpcd.conf | grep -e "static " | wc -l) -eq "0" ]]
+if [[ ! $(cat /etc/dhcpcd.conf | grep -e "static " | wc -l) -eq "0" ]]
 then
     echo "Static IP already!"
     curaddr=$(cat /etc/dhcpcd.conf | grep -e "ip_address" | sed 's/[\/]/./' | cut -d "." -f 4)
