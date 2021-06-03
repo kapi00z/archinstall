@@ -41,16 +41,21 @@ case $part in
 
     a)
         autoPart
-    ;;
-
+        ;;
+        
+    "")
+        autoPart
+        ;;
+        
     m)
         fdisk -l
         fdisk
-    ;;
+        ;;
 
     *)
         echo "Incorrect input, ending script"
-    ;;
+        exit 0
+        ;;
 
 esac
 
