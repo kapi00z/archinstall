@@ -5,6 +5,7 @@ autoPart() {
     #echo -n "Choose partition: "
     #read disk
     disk='/dev/sda'
+    cat << EOF | fdisk $disk
 g
 n
 
