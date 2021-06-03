@@ -1,10 +1,10 @@
 #!/bin/bash
 
 autoPart() {
-    fdisk -l
-    echo -n "Choose partition: "
-    read disk
-
+    #fdisk -l
+    #echo -n "Choose partition: "
+    #read disk
+    disk='/dev/sda'
     cat << EOF | fdisk $disk
     g
     n
@@ -27,7 +27,7 @@ EOF
 echo -n "Set your hostname: "
 read host
 
-disk='/dev/sda'
+#disk='/dev/sda'
 
 timedatectl set-ntp true
 
