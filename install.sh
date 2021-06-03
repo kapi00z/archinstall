@@ -81,4 +81,11 @@ arch-chroot /mnt passwd
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
-curl https://raw.githubusercontent.com/kapi00z/archinstall/master/setup.sh > /mnt/root/setup.sh
+cat << EOF > run.sh
+#!/bin/bash
+
+args=($@)
+
+curl https://raw.githubusercontent.com/kapi00z/archinstall/master/setup.sh > /root/setup.sh
+/bin/bash /root/setup.sh "${args[*]}"
+EOF
