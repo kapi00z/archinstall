@@ -5,15 +5,19 @@ autoPart() {
     #echo -n "Choose partition: "
     #read disk
     disk='/dev/sda'
-    cat << EOF | fdisk $disk
-    g
-    n
-    +512M
-    n
-    t
-    1
-    1
-    w
+g
+n
+
+
++512M
+n
+
+
+
+t
+1
+1
+w
 EOF
 
     mkfs.vfat ${disk}1
