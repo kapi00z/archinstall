@@ -62,8 +62,8 @@ then
     exit 0
 fi
 
+sed -i "s/$(cat /etc/hostname)/${host}/g" /etc/hosts
 hostnamectl set-hostname "${host}"
-sed -i "s/arch/${host}/g" /etc/hosts
 
 if [[ ! $(cat /etc/dhcpcd.conf | grep -e "static " | wc -l) -eq "0" ]]
 then
