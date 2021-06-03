@@ -71,8 +71,8 @@ cat << EOF > /mnt/etc/hosts
 127.0.1.1       ${host}.localdomain ${host}
 EOF
 
-sed -i 's/#en_US.UTF-8/en_US.UTF-8/g' /mnt/locale.gen
-arch-chroot /mnt locale-gen
+#sed -i 's/#en_US.UTF-8/en_US.UTF-8/g' /mnt/locale.gen
+#arch-chroot /mnt locale-gen
 
 arch-chroot /mnt systemctl enable dhcpcd
 
