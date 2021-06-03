@@ -88,8 +88,6 @@ pacman -S sudo vim python openssh --noconfirm
 
 sed -i 's/# %wheel ALL=(ALL) NOPASSWD: ALL/ %wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 useradd -mG wheel kacper
-echo "Provide password: "
-read -s pass
 echo "${user}:${pass}" | chpasswd
 
 systemctl restart dhcpcd
