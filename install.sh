@@ -29,6 +29,8 @@ EOF
     mount ${disk}1 /mnt/boot
 }
 
+URL_SETUP='https://raw.githubusercontent.com/kapi00z/archinstall/master/setup.sh'
+
 echo -n "Set your hostname: "
 read host
 
@@ -86,11 +88,4 @@ arch-chroot /mnt passwd
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
-cat << 'EOF' > run.sh
-#!/bin/bash
-
-args=($@)
-
-curl https://raw.githubusercontent.com/kapi00z/archinstall/master/setup.sh > /root/setup.sh
-/bin/bash /root/setup.sh "${args[*]}"
-EOF
+curl ${URL_SETUP} > /mnt/root/setup.sh
