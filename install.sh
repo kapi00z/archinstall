@@ -31,8 +31,8 @@ EOF
 
 URL_SETUP='https://raw.githubusercontent.com/kapi00z/archinstall/master/setup.sh'
 
-echo -n "Set your hostname: "
-read host
+read -p "Set your hostname: " host
+read -ps "Set your root password: " pass
 
 #disk='/dev/sda'
 
@@ -65,7 +65,7 @@ timedatectl set-ntp true
 
 autoPart
 
-pacstrap /mnt base linux linux-firmware dhcpcd grub efibootmgr
+pacstrap /mnt base linux linux-firmware dhcpcd grub efibootmgr virtualbox-guest-utils-nox
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
@@ -86,8 +86,11 @@ arch-chroot /mnt hwclock --systohc
 
 arch-chroot /mnt systemctl enable dhcpcd
 
-echo "Set your root password: "
-arch-chroot /mnt passwd
+#echo "Set your root password: "
+#arch-chroot /mnt passwd
+echo "${pass}" > /mnt/root/pass
+arch-chroot /mnt bash -c 'echo "root:$(cat /root/pass)" | chpasswd'
+rm /mnt/root/pass
 
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
