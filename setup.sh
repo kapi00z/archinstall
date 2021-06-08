@@ -58,7 +58,7 @@ elif [[ "$addr" == "" ]]
 then
     echo "Cannot generate address, exiting"
     exit 0
-elif [[ "$addr" -lt "31" || "$addr" -gt "255" ]]
+elif [[ "$addr" -lt "11" || "$addr" -gt "255" ]]
 then
     echo "Address not in range"
     exit 0
