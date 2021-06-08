@@ -15,7 +15,6 @@ sed -i 's/#Server/Server/g' /tmp/pacmirror/mirrors
 rankmirrors -n 15 -m 2 /tmp/pacmirror/mirrors > /tmp/pacmirror/tmp
 cat /tmp/pacmirror/tmp | head -n 6 > /tmp/pacmirror/list
 cat /tmp/pacmirror/tmp | tail -n 15 > /tmp/pacmirror/list
-cat /tmp/pacmirror/list
 cat /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist.backup
 cat /tmp/pacmirror/list > /etc/pacman.d/mirrorlist
 pacman -Syy --noconfirm
