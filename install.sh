@@ -77,8 +77,12 @@ cat << EOF > /mnt/etc/hosts
 127.0.1.1       ${host}.localdomain ${host}
 EOF
 
-#sed -i 's/#en_US.UTF-8/en_US.UTF-8/g' /mnt/locale.gen
-#arch-chroot /mnt locale-gen
+sed -i 's/#en_US.UTF-8/en_US.UTF-8/g' /mnt/etc/locale.gen
+arch-chroot /mnt locale-gen
+
+arch-chroot /mnt timedatectl set-timezone Europe/Warsaw
+arch-chroot /mnt timedatectl set-ntp true
+arch-chroot /mnt hwclock --systohc
 
 arch-chroot /mnt systemctl enable dhcpcd
 
