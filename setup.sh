@@ -3,6 +3,8 @@
 args=($@)
 argarr=(4 5 8)
 
+URL_MIRROR='https://raw.githubusercontent.com/kapi00z/archinstall/master/mirror.sh'
+
 testval='0'
 while getopts ":h:a:u:p:" opt
 do
@@ -94,3 +96,10 @@ systemctl restart dhcpcd
 ip addr flush enp0s3
 systemctl enable sshd
 systemctl start sshd
+
+curl ${URL_MIRROR} > /tmp/mirror.sh
+chmod +x /tmp/mirror.sh
+cp /tmp/mirror.sh /usr/local/bin/update-mirrors
+rm /tmp/mirror.sh
+
+cat /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist.bak
