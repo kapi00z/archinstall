@@ -29,10 +29,13 @@ EOF
     mount ${disk}1 /mnt/boot
 }
 
+host=$1
+pass=$2
+
 URL_SETUP='https://raw.githubusercontent.com/kapi00z/archinstall/master/setup.sh'
 
-read -p "Set your hostname: " host
-read -ps "Set your root password: " pass
+#read -p "Set your hostname: " host
+#read -ps "Set your root password: " pass
 
 #disk='/dev/sda'
 
