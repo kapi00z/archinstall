@@ -31,6 +31,7 @@ EOF
 
 host=$1
 pass=$2
+addr=$3
 
 URL_SETUP='https://raw.githubusercontent.com/kapi00z/archinstall/master/setup.sh'
 
@@ -99,3 +100,5 @@ arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootlo
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
 curl ${URL_SETUP} > /mnt/root/setup.sh
+
+arch-chroot /mnt bash /root/setup.sh -h $host -a $addr
