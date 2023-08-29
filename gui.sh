@@ -2,7 +2,9 @@
 
 function install {
     echo "Installing GUI..."
-    pacman -S plasma sddm kde-applications nvidia dolphin chromium --noconfirm
+    pacman -S xorg plasma sddm kde-applications nvidia dolphin chromium --noconfirm
+
+    systemctl enable sddm
 }
 
 read -p 'Install GUI?: ' input
@@ -16,7 +18,7 @@ case $answer in
         ;;
     
     n | no)
-        echo "no, $answer"
+        echo "Not installing gui..."
         ;;
 
     "")
