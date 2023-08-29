@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 args=($@)
 argarr=(4 5 8)
 

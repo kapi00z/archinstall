@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 function install {
     echo "Installing GUI..."
     pacman -S xorg plasma sddm kde-applications nvidia dolphin chromium --noconfirm

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 if [[ $(id -u) -ne 0 ]]
 then
     echo "Must run as root!"
