@@ -32,7 +32,7 @@ EOF
 host=$1
 #pass=$2
 pass='kacpi'
-addr=$3
+addr=$2
 
 URL_SETUP='https://raw.githubusercontent.com/kapi00z/archinstall/master/setup.sh'
 
