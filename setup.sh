@@ -5,7 +5,7 @@ set -x
 args=($@)
 argarr=(4 5 8)
 
-URL_MIRROR='https://raw.githubusercontent.com/kapi00z/archinstall/master/mirror.sh'
+#URL_MIRROR='https://raw.githubusercontent.com/kapi00z/archinstall/master/mirror.sh'
 URL_GUI='https://raw.githubusercontent.com/kapi00z/archinstall/master/gui.sh'
 
 testval='0'
@@ -98,15 +98,15 @@ echo "${user}:${pass}" | chpasswd
 #ip addr flush enp0s3
 systemctl enable sshd
 
-curl ${URL_MIRROR} > /tmp/mirror.sh
-chmod +x /tmp/mirror.sh
-cp /tmp/mirror.sh /usr/local/bin/update-mirrors
-rm /tmp/mirror.sh
+#curl ${URL_MIRROR} > /tmp/mirror.sh
+#chmod +x /tmp/mirror.sh
+#cp /tmp/mirror.sh /usr/local/bin/update-mirrors
+#rm /tmp/mirror.sh
 
 cat /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist.bak
 
-update-mirrors
+#update-mirrors
 
-curl ${URL_MIRROR} > /tmp/gui.sh
+curl ${URL_GUI} > /tmp/gui.sh
 bash /tmp/gui.sh
 rm /tmp/gui.sh
