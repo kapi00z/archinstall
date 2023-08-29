@@ -92,10 +92,8 @@ sed -i 's/# %wheel ALL=(ALL) NOPASSWD: ALL/ %wheel ALL=(ALL) NOPASSWD: ALL/' /et
 useradd -mG wheel kacper
 echo "${user}:${pass}" | chpasswd
 
-systemctl restart dhcpcd
-ip addr flush enp0s3
+#ip addr flush enp0s3
 systemctl enable sshd
-systemctl start sshd
 
 curl ${URL_MIRROR} > /tmp/mirror.sh
 chmod +x /tmp/mirror.sh
@@ -103,3 +101,6 @@ cp /tmp/mirror.sh /usr/local/bin/update-mirrors
 rm /tmp/mirror.sh
 
 cat /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist.bak
+
+update-mirrors
+
