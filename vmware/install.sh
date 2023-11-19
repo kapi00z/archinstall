@@ -58,28 +58,28 @@ getDisk() {
 autoPart() {
     #disk="$1"
     #echo "$disk"
-    #cat << EOF | fdisk $disk
-#g
-#n
-#
-#
-#+512M
-#n
-#
-#
-#
-#t
-#1
-#1
-#w
-#EOF
-#
-    #mkfs.vfat ${disk}1
-    #mkfs.ext4 ${disk}2
-#
-    #mount ${disk}2 /mnt
-    #mkdir /mnt/boot
-    #mount ${disk}1 /mnt/boot
+    cat << EOF | fdisk $disk
+g
+n
+
+
++512M
+n
+
+
+
+t
+1
+1
+w
+EOF
+
+    mkfs.vfat ${disk}1
+    mkfs.ext4 ${disk}2
+
+    mount ${disk}2 /mnt
+    mkdir /mnt/boot
+    mount ${disk}1 /mnt/boot
 }
 
 install() {
