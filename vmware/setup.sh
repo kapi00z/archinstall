@@ -20,7 +20,7 @@ EOF
 }
 
 addUser() {
-    useradd -mG kacper
+    useradd -m kacper
     echo "${user}:${pass}" | chpasswd
     echo "${user} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${user}
 }
