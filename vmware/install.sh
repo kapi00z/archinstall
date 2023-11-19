@@ -89,7 +89,7 @@ install() {
 
     echo "${host}" > /mnt/etc/hostname
 
-    arch-chroot hostnamectl set-hostname "${host}"
+    hostnamectl set-hostname "${host}"
 
     sed -i 's/#en_US.UTF-8/en_US.UTF-8/g' /mnt/etc/locale.gen
     arch-chroot /mnt locale-gen
