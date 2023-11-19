@@ -57,7 +57,7 @@ getDisk() {
 
 autoPart() {
     #disk="$1"
-    #echo "$disk"
+    echo "$disk"
     cat << EOF | fdisk $disk
 g
 n
