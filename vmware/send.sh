@@ -15,3 +15,4 @@ else
 fi
 
 scp $PWD/install.sh root@${addr}:/root
+scp $PWD/setup.sh root@${addr}:/root

@@ -82,10 +82,6 @@ autoPart() {
     #mount ${disk}1 /mnt/boot
 }
 
-getNetDev() {
-    ip -o link show | awk '{print $2}' | sed '/lo\:/d' | sed 's/\://g'
-}
-
 install() {
     pacstrap /mnt base linux linux-firmware dhcpcd grub efibootmgr vim sudo python
 
@@ -103,13 +99,20 @@ install() {
     arch-chroot /mnt hwclock --systohc
 
     arch-chroot /mnt systemctl enable dhcpcd
-
-    arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-    arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+    arch-chroot /mnt systemctl enable sshd
 }
 
 setup() {
-    
+    url='https://raw.githubusercontent.com/kapi00z/archinstall/master/vmware/setup.sh'
+
+    curl ${url} > /mnt/root/setup.sh
+
+    arch-chroot /mnt bash /root/setup.sh $host $addr $user $pass
+}
+
+grub() {
+    arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+    arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 }
 
 host=$(getHost)
@@ -137,3 +140,6 @@ autoPart
 
 #install arch
 install
+grub
+
+setup
