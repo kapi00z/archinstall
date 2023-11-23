@@ -14,5 +14,8 @@ else
     addr="$arg"
 fi
 
-scp $PWD/install.sh root@${addr}:~
-scp $PWD/setup.sh root@${addr}:~
+sed -i "/$addr/d" ~/.ssh/known_hosts
+sshpass -p kacpi ssh -o StrictHostKeyChecking=no root@$addr uname -r
+sshpass -p kacpi scp $PWD/install.sh root@${addr}:/root
+sshpass -p kacpi scp $PWD/setup.sh root@${addr}:/root
+sed -i "/$addr/d" ~/.ssh/known_hosts
