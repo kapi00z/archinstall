@@ -20,10 +20,17 @@ getUser() {
 }
 
 getUserPass() {
-    read -p "Please provide password for $1 [kacpi]: " user
+    user="$1"
+    if [[ "$user" == "kacpi" ]]
+    then
+        defpass="kacper"
+    else
+        defpass="$user"
+    fi
+    read -p "Please provide password for $user [$defpass]: " pass
     if [[ $pass == "" ]]
     then
-        pass="kacpi"
+        pass="$defpass"
     fi
     echo $pass
 }
@@ -115,31 +122,94 @@ grub() {
     arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 }
 
-host=$(getHost)
-addr="192.168.1.$(getIP)"
-user=$(getUser)
-pass=$(getUserPass $user)
+args=($@)
 
-timedatectl set-ntp true
-
-for var in $host $addr
-do
-    if [[ $var == "" ]]
+if [[ $(echo ${args[@]} | grep -ie '-h\|-a\|-d\|-u\|-p' ) ]]
+then
+    if [[ $(echo ${args[@]} | awk '/-a/ && /-h/' ) ]]
     then
-        echo "Empty variable provided!"
+        while getopts ":a:d:h:u:p:k" opt; do
+            case $opt in
+                a)
+                    addr="192.168.1.${OPTARG}"
+                    ;;
+                d)
+                    disk="${OPTARG}"
+                    ;;
+                h)
+                    host="${OPTARG}"
+                    ;;
+                p)
+                    pass="${OPTARG}"
+                    ;;
+                u)
+                    user="${OPTARG}"
+                    ;;
+                k)
+                    defuser="true"
+                    ;;
+                *)
+                    echo "-h -- hostname"
+                    echo "-a -- IP address ending (192.168.1.<a>)"
+                    echo "-d -- disk"
+                    echo "-u -- username"
+                    echo "-p -- password"
+                    echo "-k -- create kacper (kacper:kacpi), overrides -u and -p"
+                    ;;
+            esac
+        done
+        if [[ ! $(echo ${args[@]} | grep -ie '-d' ) ]] || [[ "$disk" == "" ]]
+        then
+            showDisk
+            disk=$(getDisk)
+        fi
+        if [[ "$defuser" == "true" ]]
+        then
+            user="kacper"
+            pass="kacpi"
+        else
+            if [[ ! $(echo ${args[@]} | grep -ie '-u' ) ]]
+            then
+                user=$(getUser)
+                pass=$(getUserPass $user)
+            elif [[ ! $(echo ${args[@]} | grep -ie '-p' ) ]]
+            then
+                pass="$user"
+            fi
+        fi
+    else
+        echo "both host and IP needed!"
         exit 0
     fi
-done
+else
+    host=$(getHost)
+    addr="192.168.1.$(getIP)"
+    user=$(getUser)
+    pass=$(getUserPass $user)
+    showDisk
+    disk=$(getDisk)
+fi
 
-#get disk on which to install
-showDisk
-disk=$(getDisk)
+echo "$host $addr $user $pass $disk"
 
-#define partitions, format & mount
-autoPart
-
-#install arch
-install
-grub
-
-setup
+#timedatectl set-ntp true
+#
+#for var in $host $addr
+#do
+    #if [[ $var == "" ]]
+    #then
+        #echo "Empty variable provided!"
+        #exit 0
+    #fi
+#done
+#
+##get disk on which to install
+#
+##define partitions, format & mount
+#autoPart
+#
+##install arch
+#install
+#grub
+#
+#setup
