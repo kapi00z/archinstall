@@ -124,7 +124,7 @@ grub() {
 
 args=($@)
 
-if [[ $(echo ${args[@]} | grep -ie '-h\|-a\|-d\|-u\|-p' ) ]]
+if [[ $(echo ${args[@]} | grep -ie '-h\|-a\|-d\|-u\|-p\|-k' ) ]]
 then
     if [[ $(echo ${args[@]} | awk '/-a/ && /-h/' ) ]]
     then
