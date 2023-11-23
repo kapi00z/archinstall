@@ -90,7 +90,7 @@ EOF
 }
 
 install() {
-    pacstrap /mnt base linux linux-firmware dhcpcd grub efibootmgr vim sudo python
+    pacstrap /mnt base linux linux-firmware dhcpcd grub efibootmgr vim sudo python openssh
 
     genfstab -U /mnt >> /mnt/etc/fstab
 
