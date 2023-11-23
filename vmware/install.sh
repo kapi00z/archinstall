@@ -192,24 +192,22 @@ fi
 
 echo "$host $addr $user $pass $disk"
 
-#timedatectl set-ntp true
-#
-#for var in $host $addr
-#do
-    #if [[ $var == "" ]]
-    #then
-        #echo "Empty variable provided!"
-        #exit 0
-    #fi
-#done
-#
-##get disk on which to install
-#
-##define partitions, format & mount
-#autoPart
-#
-##install arch
-#install
-#grub
-#
-#setup
+timedatectl set-ntp true
+
+for var in $host $addr
+do
+    if [[ $var == "" ]]
+    then
+        echo "Empty variable provided!"
+        exit 0
+    fi
+done
+
+#define partitions, format & mount
+autoPart
+
+#install arch
+install
+grub
+
+setup
