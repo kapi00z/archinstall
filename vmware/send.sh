@@ -1,21 +1,17 @@
 #!/bin/bash
 
-arg="$1"
+args=($@)
 
-if [[ $arg == "" ]]
+if [[ ${args[0]} == "" ]]
 then
-    if [[ $test == "" ]]
-    then
-        read -p 'Enter test IP: ' addr
-    else
-        addr="$test"
-    fi
+    read -p 'Enter test IP: ' addr
 else
-    addr="$arg"
+    addr="192.168.1.${args[0]}"
 fi
 
 sed -i "/$addr/d" ~/.ssh/known_hosts
 sshpass -p kacpi ssh -o StrictHostKeyChecking=no root@$addr uname -r
 sshpass -p kacpi scp $PWD/install.sh root@${addr}:/root
 sshpass -p kacpi scp $PWD/setup.sh root@${addr}:/root
+sshpass -p kacpi ssh -o StrictHostKeyChecking=no root@$addr bash install.sh ${args[@]:1}
 sed -i "/$addr/d" ~/.ssh/known_hosts
