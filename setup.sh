@@ -91,7 +91,8 @@ fi
 
 pacman -S sudo vim python openssh --noconfirm
 
-sed -i 's/# %wheel ALL=(ALL) NOPASSWD: ALL/ %wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
+sed -i 's/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/ %wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
+echo 'kacper ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers.d/kacper
 useradd -mG wheel kacper
 echo "${user}:${pass}" | chpasswd
 
