@@ -6,7 +6,8 @@ args=($@)
 argarr=(4 5 8)
 
 #URL_MIRROR='https://raw.githubusercontent.com/kapi00z/archinstall/master/mirror.sh'
-URL_GUI='https://raw.githubusercontent.com/kapi00z/archinstall/master/gui.sh'
+#URL_GUI='https://raw.githubusercontent.com/kapi00z/archinstall/master/gui.sh'
+URL_POST='https://raw.githubusercontent.com/kapi00z/archinstall/refs/heads/master/post-install.sh'
 
 testval='0'
 while getopts ":h:a:u:p:" opt
@@ -113,3 +114,6 @@ cat /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist.bak
 #rm /tmp/gui.sh
 
 #post-installation
+curl ${URL_POST} > /tmp/post-configuration.sh
+chmod +x /tmp/post-configuration.sh
+mv /tmp/post-configuration.sh /usr/local/bin/arch-post-install
