@@ -111,3 +111,5 @@ cat /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist.bak
 #curl ${URL_GUI} > /tmp/gui.sh
 #bash /tmp/gui.sh
 #rm /tmp/gui.sh
+
+#post-installation
