@@ -84,9 +84,9 @@ then
 else
     cat << EOF >> /etc/dhcpcd.conf
 interface enp0s3
-static ip_address=192.168.1.${addr}/24
-static routers=192.168.1.1
-static domain_name_servers=192.168.1.1 8.8.4.4
+static ip_address=192.168.0.${addr}/24
+static routers=192.168.0.1
+static domain_name_servers=192.168.1.1 8.8.8.8 8.8.4.4
 EOF
 fi
 
